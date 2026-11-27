@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizzaiolo - Contact</title>
+    <link href="https://googleapis.com" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">
+            <div class="logo-bars"><span></span><span></span></div>
+            PIZZAIOLO
+        </a>
+        <nav>
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="menu.html">MENU</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="contact.html" class="active">CONTACT</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="page-container">
+        <h1 class="page-title">Contact Us</h1>
+        <p class="page-subtitle">Send us a message or inquiry</p>
+
+        <div class="content-box">
+            <form class="contact-form" onsubmit="sendMessage(event)">
+                <input type="text" id="sender-name" placeholder="Your Name" required>
+                <input type="email" id="sender-email" placeholder="Your Email" required>
+                <textarea id="sender-msg" rows="4" placeholder="Your Message" required></textarea>
+                <button type="submit" class="btn">SEND MESSAGE</button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        function sendMessage(event) {
+            event.preventDefault();
+            let name = document.getElementById("sender-name").value;
+            alert("Thank you, " + name + "! Your message has been sent.");
+            event.target.reset();
+        }
+    </script>
+
+</body>
+</html>

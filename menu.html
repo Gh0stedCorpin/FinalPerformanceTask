@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizzaiolo - Menu</title>
+    <link href="https://googleapis.com" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">
+            <div class="logo-bars"><span></span><span></span></div>
+            PIZZAIOLO
+        </a>
+        <nav>
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="menu.html" class="active">MENU</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="page-container">
+        <h1 class="page-title">Our Pizza Menu</h1>
+        <p class="page-subtitle">Select a size and add pizzas to your order</p>
+
+        <div class="menu-grid">
+            
+            <div class="card">
+                <img src="https://static.vecteezy.com/system/resources/previews/027/537/275/large_2x/a-pepperoni-pizza-on-a-black-background-ai-generative-free-photo.jpeg" alt="Pepperoni Pizza">
+                <h3>Pepperoni</h3>
+                <p>Classic pepperoni,  tomato sauce, and mozzarella cheese.</p>
+                <select id="size-pep" onchange="changePrice('size-pep', 'price-pep', 250)">
+                    <option value="0">Medium (12")</option>
+                    <option value="100">Large (14") (+100)</option>
+                    <option value="200">Family (16") (+200)</option>
+                </select>
+                <div class="price-text">Price: <span id="price-pep">250</span></div>
+                <button class="btn" onclick="addOrder('Pepperoni', 'size-pep', 'price-pep')">Add to Order</button>
+            </div>
+
+            
+            <div class="card">
+                <img src="https://img.freepik.com/premium-photo/hawaiian-pizza-topped-with-pineapple-black-background_527134-602.jpg?w=996" alt="Hawaiian Pizza">
+                <h3>Hawaiian</h3>
+                <p> pineapple chunks,  ham, and mozzarella.</p>
+                <select id="size-haw" onchange="changePrice('size-haw', 'price-haw', 280)">
+                    <option value="0">Medium (12")</option>
+                    <option value="100">Large (14") (+100)</option>
+                    <option value="200">Family (16") (+200)</option>
+                </select>
+                <div class="price-text">Price: <span id="price-haw">280</span></div>
+                <button class="btn" onclick="addOrder('Hawaiian', 'size-haw', 'price-haw')">Add to Order</button>
+            </div>
+
+            
+            <div class="card">
+                <img src="https://img.freepik.com/premium-photo/bbq-chicken-pizza-black-background_960396-123761.jpg" alt="Texas Style BBQ Pizza">
+                <h3>Texas Style BBQ</h3>
+                <p> Texas BBQ sauce, grilled chicken, red onions, and bacon bits.</p>
+                <select id="size-bbq" onchange="changePrice('size-bbq', 'price-bbq', 320)">
+                    <option value="0">Medium (12")</option>
+                    <option value="100">Large (14") (+100)</option>
+                    <option value="200">Family (16") (+200)</option>
+                </select>
+                <div class="price-text">Price: <span id="price-bbq">320</span></div>
+                <button class="btn" onclick="addOrder('Texas Style BBQ', 'size-bbq', 'price-bbq')">Add to Order</button>
+            </div>
+        </div>
+
+        <div class="order-box">
+            <h3>Your Order Summary</h3>
+            <ul id="order-list">
+                <li>No pizzas added yet.</li>
+            </ul>
+            <p style="font-weight: 700; margin-bottom: 15px;">Total: <span id="total-amount">0</span></p>
+            <button class="btn" onclick="placeOrder()">Place Order</button>
+        </div>
+    </main>
+
+    <script>
+        let total = 0;
+        let itemCount = 0;
+
+        function changePrice(selectId, priceId, basePrice) {
+            let extra = Number(document.getElementById(selectId).value);
+            document.getElementById(priceId).innerText = basePrice + extra;
+        }
+
+        function addOrder(pizzaName, selectId, priceId) {
+            let list = document.getElementById("order-list");
+            if (itemCount === 0) {
+                list.innerHTML = "";
+            }
+
+            let selectBox = document.getElementById(selectId);
+            let sizeName = selectBox.options[selectBox.selectedIndex].text.split(" ");
+            let price = Number(document.getElementById(priceId).innerText);
+
+            let newItem = document.createElement("li");
+            newItem.innerText = pizzaName + " (" + sizeName + ") - " + price;
+            list.appendChild(newItem);
+
+            total = total + price;
+            itemCount = itemCount + 1;
+            document.getElementById("total-amount").innerText = total;
+        }
+
+        function placeOrder() {
+            if (itemCount === 0) {
+                alert("Please select a pizza first!");
+            } else {
+                alert("Order placed! Total amount: " + total);
+                document.getElementById("order-list").innerHTML = "<li>No pizzas added yet.</li>";
+                total = 0;
+                itemCount = 0;
+                document.getElementById("total-amount").innerText = "0";
+            }
+        }
+    </script>
+
+</body>
+</html>
